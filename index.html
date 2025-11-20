@@ -60,9 +60,8 @@
             top: 0;
             left: 0;
             width: 100%;
-            padding: 2rem 9%;
+            padding: 2rem 9%; /* Desktop padding */
             background-color: rgba(0, 0, 0, 0.9);
-            /* Slightly transparent background for fixed header */
             border-bottom: 1px solid rgba(183, 75, 75, 0.2);
             display: flex;
             justify-content: space-between;
@@ -81,7 +80,7 @@
         }
         
         .logo-text {
-            /* Default size for professional alignment */
+            /* Default size for desktop */
             font-size: 1.8rem; 
         }
 
@@ -89,16 +88,16 @@
             transform: scale(1.02);
         }
         
-        /* New SVG Styling (Desktop size) */
+        /* SVG Styling (Desktop size) */
         .logo-icon {
-            width: 2.8rem; /* Default size for desktop */
-            height: 2.8rem; /* Default size for desktop */
+            width: 2.8rem; 
+            height: 2.8rem;
             fill: #b74b4b;
             transition: fill 0.5s ease;
         }
         
         .logo:hover .logo-icon {
-            fill: white; /* Optional hover effect */
+            fill: white; 
         }
 
 
@@ -129,16 +128,16 @@
         /* Responsive Navigation Overrides */
         @media(max-width:995px) {
             
+            /* IMPORTANT FIX: Use correct mobile padding to ensure logo is flush left */
             header {
-                padding: 2rem 5%;
+                padding: 2rem 5%; 
             }
 
-            /* Responsive Logo Adjustment (Shrink icon and text size on mobile) */
+            /* Responsive Logo Adjustment (Smaller icon and text size on mobile) */
             .logo-icon {
                 width: 2.0rem; 
                 height: 2.0rem;
             }
-            /* NEW: Smaller text for the logo on mobile */
             .logo-text {
                 font-size: 1.6rem; 
             }
@@ -151,8 +150,9 @@
                 /* Start hidden, slide down from top */
                 position: absolute;
                 top: 100%;
+                /* Make nav width match the header width/padding */
                 left: 0;
-                width: 100%;
+                width: 100%; 
                 background-color: #161616;
                 border-top: 1px solid rgba(183, 75, 75, 0.2);
                 box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
