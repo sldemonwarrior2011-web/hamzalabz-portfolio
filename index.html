@@ -313,8 +313,7 @@
 
         @media(max-width:995px) {
             .home {
-                /* Changed to 'column' so content remains on top and image on bottom, 
-                   following the new HTML source order (Content -> Image) */
+                /* Stacks content vertically on mobile: Image (Top) -> Content (Bottom) */
                 flex-direction: column; 
                 margin-top: 5rem;
                 padding-top: 10rem;
@@ -653,9 +652,13 @@
     <!-- 1. Home Section -->
     <section class="home" id="home">
         <!-- 
-            UPDATED: home-content is now placed BEFORE home-img in the source 
-            to achieve Content (Left) and Image (Right) layout on desktop.
+            UPDATED: home-img is now placed BEFORE home-content in the source 
+            to achieve Image (Left) and Content (Right) layout on desktop.
         -->
+        <div class="home-img">
+            <!-- Using a placeholder image URL for general availability. Replace with your logo. -->
+            <img src="Hamza Labz Logo.png" alt="Hamza Labz Logo">
+        </div>
         <div class="home-content">
             <h1>Hi, It's <span>Hamza Labz</span></h1>
             <h3 class="typing-text">I'm a <span></span></h3>
@@ -666,10 +669,6 @@
             </div>
             <!-- This button links to the contact section, as requested previously -->
             <a href="#contact" class="btn">Hire me</a>
-        </div>
-        <div class="home-img">
-            <!-- Using a placeholder image URL for general availability. Replace with your logo. -->
-            <img src="Hamza Labz Logo.png" alt="Hamza Labz Logo">
         </div>
     </section>
 
