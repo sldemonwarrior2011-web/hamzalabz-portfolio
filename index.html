@@ -313,7 +313,9 @@
 
         @media(max-width:995px) {
             .home {
-                flex-direction: column-reverse;
+                /* Changed to 'column' so content remains on top and image on bottom, 
+                   following the new HTML source order (Content -> Image) */
+                flex-direction: column; 
                 margin-top: 5rem;
                 padding-top: 10rem;
                 text-align: center;
@@ -650,10 +652,10 @@
 
     <!-- 1. Home Section -->
     <section class="home" id="home">
-        <div class="home-img">
-            <!-- Using a placeholder image URL for general availability. Replace with your logo. -->
-            <img src="Hamza Labz Logo.png" alt="Hamza Labz Logo">
-        </div>
+        <!-- 
+            UPDATED: home-content is now placed BEFORE home-img in the source 
+            to achieve Content (Left) and Image (Right) layout on desktop.
+        -->
         <div class="home-content">
             <h1>Hi, It's <span>Hamza Labz</span></h1>
             <h3 class="typing-text">I'm a <span></span></h3>
@@ -662,8 +664,12 @@
                 <a href="https://facebook.com/hamzalabzz" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
                 <a href="https://www.instagram.com/hamzalabz/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
             </div>
-            <!-- UPDATED: Link now scrolls to the Contact section (ID: #contact) -->
+            <!-- This button links to the contact section, as requested previously -->
             <a href="#contact" class="btn">Hire me</a>
+        </div>
+        <div class="home-img">
+            <!-- Using a placeholder image URL for general availability. Replace with your logo. -->
+            <img src="Hamza Labz Logo.png" alt="Hamza Labz Logo">
         </div>
     </section>
 
