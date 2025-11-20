@@ -9,7 +9,7 @@
     
     <style>
         /*
-         * START: COMBINED CSS STYLES (from portfolio.css and services.html inline styles)
+         * START: COMBINED CSS STYLES 
          */
 
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
@@ -71,17 +71,38 @@
         }
 
         .logo {
-            font-size: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
             color: #b74b4b;
             font-weight: 800;
             cursor: pointer;
             transition: 0.5s ease;
         }
-
-        .logo:hover {
-            transform: scale(1.05);
+        
+        .logo-text {
+            /* Logo text size matches navigation link size for professional alignment */
+            font-size: 1.8rem; 
         }
 
+        .logo:hover {
+            transform: scale(1.02);
+        }
+        
+        /* New SVG Styling (Desktop size) */
+        .logo-icon {
+            width: 2.8rem; /* Default size for desktop */
+            height: 2.8rem; /* Default size for desktop */
+            fill: #b74b4b;
+            transition: fill 0.5s ease;
+        }
+        
+        .logo:hover .logo-icon {
+            fill: white; /* Optional hover effect */
+        }
+
+
+        /* Desktop Navigation Links */
         nav a {
             font-size: 1.8rem;
             color: white;
@@ -97,29 +118,51 @@
             border-bottom: 3px solid #b74b4b;
         }
 
-        /* Mobile Navigation Toggle */
+        /* Mobile Menu Button */
+        #menu-icon {
+            font-size: 3rem;
+            color: white;
+            cursor: pointer;
+            display: none; /* Hidden on desktop */
+        }
+
+        /* Responsive Navigation Overrides */
         @media(max-width:995px) {
+            
+            /* Responsive Logo Adjustment (Shrink icon size on mobile) */
+            .logo-icon {
+                width: 2.0rem; 
+                height: 2.0rem;
+            }
+
             header {
                 padding: 2rem 5%;
             }
 
-            nav {
-                position: absolute;
-                display: none;
-                top: 100%;
-                /* Position below header */
-                right: 0;
-                width: 100%;
-                max-width: 300px;
-                border-top: 3px solid #b74b4b;
-                padding: 1rem 0;
-                background-color: #161616;
-                border-radius: 0 0 0 2rem;
-                box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+            #menu-icon {
+                display: block; /* Show icon on mobile */
             }
 
+            nav {
+                /* Start hidden, slide down from top */
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: #161616;
+                border-top: 1px solid rgba(183, 75, 75, 0.2);
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+                
+                /* Transition for smooth slide effect */
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.4s ease-out;
+            }
+
+            /* State when menu is open */
             nav.active {
-                display: block;
+                max-height: 300px; /* Adjust height based on content */
+                padding: 1rem 0;
             }
 
             nav a {
@@ -128,6 +171,7 @@
                 margin: 1.5rem 3rem;
                 padding: 1rem;
                 border-bottom: none;
+                text-align: center;
             }
 
             nav a:hover,
@@ -230,17 +274,16 @@
             box-shadow: 0 0 25px #b74b4b;
         }
 
-        /* Typing Text Animation (Adapted for JS manipulation) */
+        /* Typing Text Animation */
         .typing-text {
             font-size: 3.4rem;
-            /* Adjusted to rem */
             font-weight: 600;
             min-width: 280px;
         }
 
         .typing-text span {
             position: relative;
-            color: #b74b4b; /* Set color for the typed text */
+            color: #b74b4b;
         }
 
         /* Cursor blinking effect */
@@ -249,7 +292,6 @@
             background-color: black;
             position: absolute;
             width: 8px;
-            /* Fixed width for the cursor block */
             height: 100%;
             border-left: 3px solid black;
             right: -8px;
@@ -272,7 +314,6 @@
         @media(max-width:995px) {
             .home {
                 flex-direction: column-reverse;
-                /* Put image above text on mobile */
                 margin-top: 5rem;
                 padding-top: 10rem;
                 text-align: center;
@@ -292,7 +333,7 @@
             }
         }
 
-        /* Services Section Styles (From services.html) */
+        /* Services Section Styles */
         .services {
             padding-top: 10rem;
         }
@@ -316,22 +357,19 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 3rem;
-            padding: 0 9%; /* Maintain section padding */
+            padding: 0 9%;
         }
 
         .service-card {
             background-color: #161616;
-            /* Dark background */
             width: 350px;
             text-align: center;
             padding: 3rem 2.5rem;
             border-radius: 1rem;
             box-shadow: 0 0 25px rgba(183, 75, 75, 0.2);
-            /* Red shadow */
             border: 2px solid rgba(183, 75, 75, 0.5);
             transition: transform 0.3s, box-shadow 0.3s;
             color: white;
-            /* Ensure text is white */
         }
 
         .service-card:hover {
@@ -343,7 +381,6 @@
             font-size: 4rem;
             margin-bottom: 2rem;
             color: #b74b4b;
-            /* Icon color */
         }
 
         .service-card h2 {
@@ -550,7 +587,6 @@
 
         .contact form .btn {
             margin-top: 2rem;
-            /* Ensure the button uses the correct WhatsApp styling */
             background-color: #25D366; /* WhatsApp Green */
             color: white;
             border-color: #25D366;
@@ -588,7 +624,19 @@
 
 <body>
     <header>
-        <a href="#home" class="logo">Hamza labz</a>
+        <a href="#home" class="logo">
+            <!-- Inline SVG Logo for Professional, Scalable Look -->
+            <svg class="logo-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <!-- A minimalist, abstract 'H' or 'Lab' icon -->
+                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 1.5l8 4v8.5l-8 4-8-4V7.5l8-4z"/>
+                <path d="M12 11l-5 2.5v3.5l5 2.5 5-2.5v-3.5l-5-2.5zM12 12.5l3 1.5-3 1.5-3-1.5 3-1.5z"/>
+                <path d="M7 7.5l5 2.5 5-2.5-5-2.5-5 2.5z"/>
+            </svg>
+            <span class="logo-text">Hamza labz</span>
+        </a>
+
+        <!-- Mobile Menu Icon (Hamburger) -->
+        <i class="fa-solid fa-bars" id="menu-icon"></i>
 
         <nav>
             <a href="#home" class="active">Home</a>
@@ -611,23 +659,22 @@
             <h3 class="typing-text">I'm a <span></span></h3>
             <p>Welcome to Hamza Labz – where creativity meets expertise. Explore my projects, designs, and innovations that reflect passion, skill, and dedication. From web and graphic design to digital solutions, discover how I turn ideas into impactful experiences.</p>
             <div class="social-icons">
-                <a href="https://facebook.com/hamzalabzz"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="https://www.instagram.com/hamzalabz/"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://facebook.com/hamzalabzz" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/hamzalabz/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
             </div>
+            <!-- UPDATED: Link now scrolls to the Contact section (ID: #contact) -->
             <a href="#contact" class="btn">Hire me</a>
         </div>
     </section>
 
-    <!-- 2. Services Section (Integrated from services.html) -->
+    <!-- 2. Services Section -->
     <section class="services" id="services">
         <h2 class="heading">My <span>Services</span></h2>
         
-        <!-- Services Intro -->
         <div class="services-intro">
             <p>Turning creative visions into technical realities. I offer comprehensive solutions across design, development, and digital marketing.</p>
         </div>
 
-        <!-- Services Grid -->
         <div class="services-grid">
             <div class="service-card">
                 <i class="service-icon fa-solid fa-laptop-code"></i>
@@ -733,19 +780,16 @@
     <!-- 6. Contact Section -->
     <section class="contact" id="contact">
         <h2 class="heading">Contact <span>Me</span></h2>
-        <!-- Form action removed, now handled by JavaScript -->
         <form id="whatsappForm">
             <div class="input-box">
                 <input type="text" name="fullName" placeholder="Full Name" required>
                 <input type="email" name="email" placeholder="Email Address" required>
             </div>
             <div class="input-box">
-                <!-- Mobile number is optional but helpful -->
                 <input type="number" name="mobile" placeholder="Mobile Number"> 
                 <input type="text" name="subject" placeholder="Inquiry Subject" required>
             </div>
             <textarea name="message" cols="30" rows="10" placeholder="Your Message" required></textarea>
-            <!-- Changed to a standard submit button -->
             <button type="submit" class="btn">Send Message via WhatsApp <i class="fa-brands fa-whatsapp"></i></button>
         </form>
     </section>
@@ -760,27 +804,31 @@
     <script>
         // JavaScript for mobile navigation toggle
         const nav = document.querySelector('nav');
-        const logo = document.querySelector('.logo');
-        const header = document.querySelector('header');
+        const menuIcon = document.getElementById('menu-icon');
+        const navLinks = document.querySelectorAll('header nav a');
+        const sections = document.querySelectorAll('section');
 
-        // Simple function to toggle the 'active' class on nav for mobile views
-        logo.addEventListener('click', () => {
-            if (window.innerWidth < 995) {
-                nav.classList.toggle('active');
-            }
+        // Toggle the mobile menu when the icon is clicked
+        menuIcon.addEventListener('click', () => {
+            nav.classList.toggle('active');
         });
 
         // Hide navigation when a link is clicked (mobile)
-        document.querySelectorAll('nav a').forEach(link => {
+        navLinks.forEach(link => {
             link.addEventListener('click', () => {
+                // Remove the 'active' class on mobile to hide the menu
                 if (window.innerWidth < 995) {
                     nav.classList.remove('active');
                 }
-                // Also update the active link status
-                document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-                link.classList.add('active');
+                // Update the active link status
+                navLinks.forEach(a => a.classList.remove('active'));
+                // Check if the link has a hash and matches a section id before setting active class
+                if (link.getAttribute('href').startsWith('#')) {
+                    link.classList.add('active');
+                }
             });
         });
+
 
         // Simple logic for the typing text animation
         const typingTextElement = document.querySelector('.typing-text span');
@@ -795,7 +843,6 @@
                 ? currentWord.substring(0, charIndex)
                 : currentWord.substring(0, charIndex + 1);
 
-            // Directly set the text content to manage the typing effect
             typingTextElement.textContent = display;
 
             if (!isDeleting && charIndex < currentWord.length) {
@@ -821,9 +868,6 @@
         };
 
         // Header active state on scroll (simple implementation)
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('header nav a');
-
         window.onscroll = () => {
             sections.forEach(sec => {
                 const top = window.scrollY;
@@ -845,11 +889,11 @@
         };
         
         // ==========================================================
-        // WhatsApp Form Submission Logic
+        // WhatsApp Form Submission Logic (Number: 254727067046)
         // ==========================================================
         const whatsappForm = document.getElementById('whatsappForm');
 
-        // UPDATED: Your WhatsApp number, including the country code (assuming Kenya: +254)
+        // Your WhatsApp number in international format (Kenya: +254)
         const WHATSAPP_NUMBER = '+94727067046'; 
 
         if (whatsappForm) {
