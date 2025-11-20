@@ -345,12 +345,25 @@
         const whatsappForm = document.getElementById('whatsappForm');
         const contactMessage = document.getElementById('contact-message');
 
-        // IMPORTANT: Replace '254712345678' with Hamza Labz's actual WhatsApp number.
+        /**
+         * IMPORTANT: REPLACE THIS PLACEHOLDER WITH YOUR ACTUAL WHATSAPP NUMBER.
+         * Format: Country Code + Area Code + Number (e.g., 15551234567). NO leading +, spaces, or dashes.
+         */
         const WHATSAPP_NUMBER = '+94727067046'; 
 
         if (whatsappForm) {
             whatsappForm.addEventListener('submit', function (e) {
                 e.preventDefault(); 
+
+                contactMessage.classList.add('hidden'); // Hide previous messages
+
+                if (!WHATSAPP_NUMBER) {
+                    contactMessage.textContent = 'ERROR: WhatsApp number is not configured in the script. Please set the WHATSAPP_NUMBER variable.';
+                    contactMessage.classList.remove('hidden');
+                    contactMessage.classList.remove('text-green-400');
+                    contactMessage.classList.add('text-red-400');
+                    return; // Stop execution if number is missing
+                }
 
                 const fullName = this.querySelector('[name="fullName"]').value;
                 const email = this.querySelector('[name="email"]').value;
@@ -370,6 +383,8 @@
                 // 4. Show a quick confirmation message and redirect
                 contactMessage.textContent = 'Redirecting to WhatsApp...';
                 contactMessage.classList.remove('hidden');
+                contactMessage.classList.remove('text-red-400');
+                contactMessage.classList.add('text-gray-300');
 
                 // 5. Redirect the user to WhatsApp in a new tab
                 window.open(whatsappUrl, '_blank');
@@ -377,7 +392,8 @@
                 // Optional: Clear form after redirection, ensuring UX is smooth
                 setTimeout(() => {
                     whatsappForm.reset();
-                    contactMessage.textContent = 'Message initiated! Check your WhatsApp.';
+                    contactMessage.textContent = 'Message initiated! Check your WhatsApp window.';
+                    contactMessage.classList.remove('text-gray-300');
                     contactMessage.classList.add('text-green-400');
                 }, 1000);
             });
