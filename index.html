@@ -81,7 +81,7 @@
         }
         
         .logo-text {
-            /* Logo text size matches navigation link size for professional alignment */
+            /* Default size for professional alignment */
             font-size: 1.8rem; 
         }
 
@@ -129,14 +129,18 @@
         /* Responsive Navigation Overrides */
         @media(max-width:995px) {
             
-            /* Responsive Logo Adjustment (Shrink icon size on mobile) */
+            header {
+                padding: 2rem 5%;
+            }
+
+            /* Responsive Logo Adjustment (Shrink icon and text size on mobile) */
             .logo-icon {
                 width: 2.0rem; 
                 height: 2.0rem;
             }
-
-            header {
-                padding: 2rem 5%;
+            /* NEW: Smaller text for the logo on mobile */
+            .logo-text {
+                font-size: 1.6rem; 
             }
 
             #menu-icon {
@@ -651,10 +655,7 @@
 
     <!-- 1. Home Section -->
     <section class="home" id="home">
-        <!-- 
-            UPDATED: home-img is now placed BEFORE home-content in the source 
-            to achieve Image (Left) and Content (Right) layout on desktop.
-        -->
+        <!-- Image (Left) / Content (Right) for Desktop -->
         <div class="home-img">
             <!-- Using a placeholder image URL for general availability. Replace with your logo. -->
             <img src="Hamza Labz Logo.png" alt="Hamza Labz Logo">
