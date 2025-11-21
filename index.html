@@ -6,304 +6,781 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <title>Hamza Labz | Portfolio</title>
-    <!-- Load Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'primary-red': '#b74b4b',
-                        'accent-purple': '#a855f7',
-                        'dark-bg': '#000000',
-                    },
-                    fontFamily: {
-                        sans: ['Poppins', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
+    
     <style>
-        /* Base: Enable smooth scrolling for all links */
+        /* Define the new primary accent color based on the logo */
+        :root {
+            --primary-accent: #8A2BE2; /* Electric Purple */
+            --secondary-accent: #a855f7; /* For softer shadows/gradients */
+            --bg-dark: #000000;
+            --bg-light: #161616;
+        }
+
+        /*
+         * START: COMBINED CSS STYLES 
+         */
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            border: none;
+            outline: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
         html {
+            font-size: 62.5%; /* 1rem = 10px */
             scroll-behavior: smooth;
         }
 
-        /* Custom animation for typing text */
-        .typing-text span::after {
-            content: '|';
-            display: inline-block;
-            animation: blink 0.7s infinite;
-            margin-left: 2px;
-            font-weight: 500;
+        body {
+            width: 100%;
+            overflow-x: hidden;
+            background-color: var(--bg-dark);
+            color: white;
         }
 
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+        section {
+            min-height: 100vh;
+            padding: 10rem 9% 5rem;
         }
 
-        /* Gradient for buttons and highlights */
-        .btn-primary {
-            background: linear-gradient(90deg, #b74b4b, #a855f7);
-            box-shadow: 0 0 1rem #b74b4b;
-            transition: all 0.3s ease;
+        .heading {
+            text-align: center;
+            font-size: 4.5rem;
+            margin-bottom: 5rem;
         }
 
-        .btn-primary:hover {
-            box-shadow: 0 0 1rem #a855f7;
+        span {
+            color: var(--primary-accent);
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 9%;
+            background-color: rgba(0, 0, 0, 0.9);
+            border-bottom: 1px solid rgba(138, 43, 226, 0.2); /* Purple border */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 3rem;
+            color: var(--primary-accent);
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.5s ease;
+        }
+
+        .logo:hover {
             transform: scale(1.05);
         }
 
-        .social-icon-link {
-            transition: color 0.3s, transform 0.3s, box-shadow 0.3s;
+        nav a {
+            font-size: 1.8rem;
+            color: white;
+            margin-left: 4rem;
+            font-weight: 500;
+            transition: 0.3s ease;
+            border-bottom: 3px solid transparent;
         }
 
-        .social-icon-link:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 10px rgba(183, 75, 75, 0.5);
+        nav a:hover,
+        nav a.active {
+            color: var(--primary-accent);
+            border-bottom: 3px solid var(--primary-accent);
         }
 
-        /* Responsive Navbar adjustments for mobile menu icon */
+        /* Mobile Navigation Toggle */
         #menu-icon {
+            font-size: 3rem;
+            color: white;
             cursor: pointer;
-            z-index: 101;
+            display: none; /* Hidden on desktop */
+        }
+        
+        @media(max-width:995px) {
+            header {
+                padding: 2rem 5%;
+            }
+            
+            #menu-icon {
+                display: block; /* Show on mobile */
+            }
+
+            nav {
+                position: fixed;
+                display: flex; /* Changed from none to flex for JS control */
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                top: 0;
+                right: 0;
+                height: 100vh;
+                width: 100%;
+                max-width: 300px;
+                background-color: var(--bg-light);
+                border-left: 3px solid var(--primary-accent);
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+                transform: translateX(100%);
+                transition: transform 0.3s ease-out;
+            }
+
+            nav.active {
+                transform: translateX(0);
+            }
+
+            nav a {
+                margin: 2rem 0;
+                padding: 1.5rem;
+                font-size: 2.2rem;
+                width: 80%;
+                text-align: center;
+            }
+
+            nav a:hover,
+            nav a.active {
+                background-color: rgba(138, 43, 226, 0.1);
+                border-radius: 0.5rem;
+                border-bottom: 3px solid var(--primary-accent);
+            }
         }
 
-        #nav-links {
-            transition: transform 0.3s ease-out;
-            transform: translateX(100%);
-            z-index: 99;
+
+        /* Home Section Styles */
+        .home {
+            padding-top: 10rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8rem;
         }
 
-        #nav-links.open {
-            transform: translateX(0);
+        .home .home-content h1 {
+            font-size: 6rem;
+            font-weight: 700;
+            line-height: 1.3;
         }
 
-        /* Base styles from previous version (now inlined or managed by Tailwind) */
+        .home-content h3 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .home-content p {
+            font-size: 1.6rem;
+            max-width: 600px;
+        }
+
+        .home-img {
+            border-radius: 50%;
+        }
+
+        .home-img img {
+            position: relative;
+            width: 25vw;
+            min-width: 280px;
+            border-radius: 50%;
+            border: 0.5rem solid var(--primary-accent);
+            box-shadow: 0 0 25px var(--primary-accent), 0 0 50px var(--secondary-accent);
+            cursor: pointer;
+            transition: 0.5s ease-in-out;
+        }
+
+        .home-img img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 50px var(--primary-accent), 0 0 100px var(--secondary-accent);
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 4.4rem;
+            height: 4.4rem;
+            background-color: transparent;
+            border: 0.2rem solid var(--primary-accent);
+            font-size: 2rem;
+            border-radius: 50%;
+            margin: 3rem 1.5rem 3rem 0;
+            transition: 0.3s ease;
+            color: var(--primary-accent);
+        }
+
+        .social-icons a:hover {
+            color: black;
+            transform: scale(1.2) translateY(-5px);
+            background-color: var(--primary-accent);
+            box-shadow: 0 0 25px var(--primary-accent);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1.2rem 3rem; /* Slightly larger button */
+            background-color: transparent;
+            border-radius: 4rem;
+            font-size: 1.8rem; /* Slightly larger font */
+            color: var(--primary-accent);
+            letter-spacing: 0.2rem;
+            font-weight: 600;
+            border: 2px solid var(--primary-accent);
+            transition: 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: scale(1.03);
+            background-color: var(--primary-accent);
+            color: black;
+            box-shadow: 0 0 25px var(--primary-accent);
+        }
+
+        /* Typing Text Animation */
+        .typing-text {
+            font-size: 3.4rem;
+            font-weight: 600;
+            min-width: 280px;
+        }
+
+        .typing-text span {
+            position: relative;
+            color: var(--primary-accent);
+        }
+
+        .typing-text span::after {
+            content: "";
+            background-color: var(--bg-dark);
+            position: absolute;
+            width: 8px;
+            height: 100%;
+            border-left: 3px solid var(--bg-dark);
+            right: -8px;
+            animation: cursor 0.6s infinite;
+        }
+
+        @keyframes cursor {
+            to {
+                border-left: 3px solid var(--primary-accent);
+            }
+        }
+        
+        /* Responsive Home Section */
+        @media (max-width: 1000px) {
+            .home {
+                gap: 4rem;
+            }
+        }
+
+        @media(max-width:995px) {
+            .home {
+                flex-direction: column-reverse;
+                margin-top: 5rem;
+                padding-top: 10rem;
+                text-align: center;
+            }
+
+            .home .home-content h3 {
+                font-size: 3rem;
+            }
+
+            .home-content h1 {
+                font-size: 5rem;
+            }
+
+            .home-img img {
+                width: 70vw;
+                margin-bottom: 4rem;
+            }
+        }
+
+        /* Services Section Styles */
+        .services {
+            padding-top: 10rem;
+        }
+        
+        .services-intro {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+        
+        .services-intro p {
+            font-size: 1.8rem;
+            color: #ccc;
+        }
+
+        .services-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 3rem;
+            padding: 0 9%;
+        }
+
+        .service-card {
+            background-color: var(--bg-light);
+            width: 350px;
+            text-align: center;
+            padding: 3rem 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 0 25px rgba(138, 43, 226, 0.2);
+            border: 2px solid rgba(138, 43, 226, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+            color: white;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 40px var(--primary-accent);
+        }
+        
+        .service-card a {
+            color: var(--primary-accent);
+            font-size: 1.6rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 1.5rem;
+            transition: 0.3s ease;
+        }
+
+        .service-card a:hover {
+            color: var(--secondary-accent);
+            text-decoration: underline;
+        }
+
+
+        .service-icon {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            color: var(--primary-accent);
+        }
+
+        .service-card h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .service-card p {
+            font-size: 1.6rem;
+            color: #ccc;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .service-card {
+                width: 100%;
+                max-width: 350px;
+            }
+        }
+
+
+        /* Skills Section Styles */
+        .skills-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 3rem;
+        }
+
+        .skill-box {
+            background: var(--bg-light);
+            padding: 3rem 2rem 4rem;
+            border-radius: 1rem;
+            text-align: center;
+            border: .2rem solid var(--primary-accent);
+            transition: .5s ease;
+            max-width: 350px;
+        }
+
+        .skill-box:hover {
+            border-color: #fff;
+            transform: scale(1.05);
+            box-shadow: 0 0 25px var(--primary-accent);
+        }
+
+        .skill-box i {
+            font-size: 5rem;
+            color: var(--primary-accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-box h3 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-box p {
+            font-size: 1.6rem;
+            color: #ccc;
+        }
+        
+        /* Experience Section (Timeline Style) */
+        .timeline-items {
+            max-width: 1000px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .timeline-items::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background-color: var(--primary-accent);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            margin-bottom: 40px;
+            position: relative;
+            width: 100%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            padding-right: 50%;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            padding-left: 50%;
+        }
+
+        .timeline-dot {
+            height: 20px;
+            width: 20px;
+            background-color: var(--primary-accent);
+            box-shadow: 0 0 25px var(--primary-accent);
+            border-radius: 50%;
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .timeline-date {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary-accent);
+            margin-bottom: 1rem;
+        }
+
+        .timeline-content {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 0.8rem;
+            border: 1px solid rgba(138, 43, 226, 0.5);
+            transition: 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            box-shadow: 0 0 15px var(--primary-accent);
+        }
+
+        .timeline-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-content p {
+            font-size: 1.6rem;
+            color: #ccc;
+        }
+
+        @media (max-width: 768px) {
+            .timeline-items::before {
+                left: 0;
+            }
+
+            .timeline-item {
+                padding-left: 3rem;
+                padding-right: 0;
+            }
+
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                padding-left: 3rem;
+                padding-right: 0;
+                text-align: left;
+            }
+
+            .timeline-dot {
+                left: -1px;
+            }
+        }
+
+        /* Contact Section Styles */
+        .contact form {
+            max-width: 70rem;
+            margin: 1rem auto;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .contact form .input-box {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .contact form .input-box input,
+        .contact form textarea {
+            width: 100%;
+            padding: 1.5rem;
+            font-size: 1.6rem;
+            color: white;
+            background: var(--bg-light);
+            border-radius: 0.8rem;
+            margin: 0.7rem 0;
+            border: 1px solid var(--primary-accent);
+            resize: none;
+        }
+
+        .contact form .input-box input:focus,
+        .contact form textarea:focus {
+            box-shadow: 0 0 10px var(--primary-accent);
+        }
+
+        .contact form .input-box input:nth-child(2) {
+            margin-right: 1rem;
+        }
+
+        .contact form .input-box input {
+            width: 49%;
+        }
+
+        .contact form textarea {
+            width: 100%;
+        }
+
+        .contact form .btn {
+            margin-top: 2rem;
+            /* Ensure the button uses the correct WhatsApp styling */
+            background-color: #25D366; /* WhatsApp Green */
+            color: white;
+            border-color: #25D366;
+            transition: all 0.3s ease;
+            padding: 1rem 2.8rem; /* Adjusted for contact button */
+            font-size: 1.6rem;
+        }
+        
+        .contact form .btn:hover {
+            background-color: #128C7E;
+            color: white;
+            box-shadow: 0 0 25px #25D366;
+        }
+
+        /* Mobile specific style for the contact button */
+        @media (max-width: 480px) {
+            .contact form .btn {
+                padding: 0.8rem 2rem; /* Make button smaller on small phones */
+                font-size: 1.4rem;
+            }
+        }
+        
+
+        /* Footer Styles */
+        .footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 9%;
+            background: var(--bg-light);
+            color: white;
+            font-size: 1.6rem;
+            border-top: 1px solid rgba(138, 43, 226, 0.2);
+        }
+
+        .footer p {
+            font-size: 1.6rem;
+        }
+
+        /*
+         * END: COMBINED CSS STYLES
+         */
     </style>
 </head>
 
-<body class="bg-dark-bg text-white font-sans antialiased">
+<body>
+    <header>
+        <a href="#home" class="logo">Hamza labz</a>
+        
+        <!-- Mobile Menu Icon -->
+        <div id="menu-icon"><i class="fas fa-bars"></i></div>
 
-    <!-- Header & Navigation -->
-    <header class="fixed top-0 left-0 w-full p-4 md:px-20 z-50 bg-transparent backdrop-blur-sm">
-        <div class="flex justify-between items-center max-w-7xl mx-auto">
-            <a href="#home" class="text-3xl text-primary-red font-extrabold cursor-pointer nav-link">Hamza Labz</a>
-
-            <!-- Desktop Nav Links -->
-            <nav id="desktop-nav" class="hidden md:flex space-x-8">
-                <a href="#home" class="text-white hover:text-accent-purple transition duration-300 nav-link">Home</a>
-                <a href="#services" class="text-white hover:text-accent-purple transition duration-300 nav-link">Services</a>
-                <a href="#skills" class="text-white hover:text-accent-purple transition duration-300 nav-link">Skills</a>
-                <a href="#education" class="text-white hover:text-accent-purple transition duration-300 nav-link">Education</a>
-                <a href="#experience" class="text-white hover:text-accent-purple transition duration-300 nav-link">Experience</a>
-                <a href="#contact" class="text-white hover:text-accent-purple transition duration-300 nav-link">Contact</a>
-            </nav>
-
-            <!-- Menu Icon for Mobile -->
-            <div id="menu-icon" class="text-3xl text-white md:hidden">
-                <i class="fas fa-bars"></i>
-            </div>
-        </div>
+        <!-- Navigation Links -->
+        <nav>
+            <a href="#home" class="active">Home</a>
+            <a href="#services">Services</a>
+            <a href="#skills">Skills</a>
+            <!-- Removed Education link -->
+            <a href="#experience">Experience</a>
+            <a href="#contact">Contact</a>
+        </nav>
     </header>
 
-    <!-- Mobile Navigation Overlay -->
-    <nav id="nav-links" class="fixed top-0 right-0 h-full w-64 bg-dark-bg/95 backdrop-blur-md flex flex-col items-center justify-center space-y-8 md:hidden shadow-lg">
-        <a href="#home" class="text-2xl text-white hover:text-accent-purple transition duration-300 p-2 nav-link" onclick="toggleMenu()">Home</a>
-        <a href="#services" class="text-2xl text-white hover:text-accent-purple transition duration-300 p-2 nav-link" onclick="toggleMenu()">Services</a>
-        <a href="#skills" class="text-2xl text-white hover:text-accent-purple transition duration-300 p-2 nav-link" onclick="toggleMenu()">Skills</a>
-        <a href="#education" class="text-2xl text-white hover:text-accent-purple transition duration-300 p-2 nav-link" onclick="toggleMenu()">Education</a>
-        <a href="#experience" class="text-2xl text-white hover:text-accent-purple transition duration-300 p-2 nav-link" onclick="toggleMenu()">Experience</a>
-        <a href="#contact" class="text-2xl text-white hover:text-accent-purple transition duration-300 p-2 nav-link" onclick="toggleMenu()">Contact</a>
-    </nav>
+    <!-- 1. Home Section -->
+    <section class="home" id="home">
+        <div class="home-img">
+            <!-- Using the uploaded logo image -->
+            <img src="Hamza Labz Logo.png" alt="Hamza Labz Logo">
+        </div>
+        <div class="home-content">
+            <h1>Hi, It's <span>Hamza Labz</span></h1>
+            <h3 class="typing-text">I'm a <span></span></h3>
+            <p>Welcome to Hamza Labz – where creativity meets expertise. Explore my projects, designs, and innovations that reflect passion, skill, and dedication. From web and graphic design to digital solutions, discover how I turn ideas into impactful experiences.</p>
+            <div class="social-icons">
+                <a href="https://facebook.com/hamzalabzz" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/hamzalabz/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+            <a href="#contact" class="btn">Hire me</a>
+        </div>
+    </section>
 
+    <!-- 2. Services Section -->
+    <section class="services" id="services">
+        <h2 class="heading">My <span>Services</span></h2>
+        
+        <!-- Services Intro -->
+        <div class="services-intro">
+            <p>Turning creative visions into technical realities. I offer comprehensive solutions across design, development, and digital marketing.</p>
+        </div>
 
-    <!-- HOME SECTION -->
-    <section id="home" class="min-h-screen pt-24 flex items-center justify-center p-8">
-        <div class="container mx-auto grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <!-- Services Grid -->
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="service-icon fa-solid fa-laptop-code"></i>
+                <h2>Full Stack Web Development</h2>
+                <p>From initial concept and design to deployment, I build complete, scalable, and high-performance web applications using modern technologies.</p>
+                <a href="#">View More</a> <!-- Updated text -->
+            </div>
+            <div class="service-card">
+                <i class="service-icon fa-solid fa-palette"></i>
+                <h2>Branding & Graphic Design</h2>
+                <p>Developing compelling brand identities, logos, and visual materials that communicate your message clearly and professionally across all platforms.</p>
+                <a href="#">View More</a> <!-- Updated text -->
+            </div>
+            <div class="service-card">
+                <i class="service-icon fa-solid fa-mobile-screen-button"></i>
+                <h2>Responsive UI/UX Design</h2>
+                <p>Creating intuitive, user-friendly interfaces and experiences that look and function perfectly on desktops, tablets, and mobile devices.</p>
+                <a href="#">View More</a> <!-- Updated text -->
+            </div>
+            <div class="service-card">
+                <i class="service-icon fa-solid fa-wordpress"></i>
+                <h2>WordPress Development</h2>
+                <p>Custom theme development, plugin integration, and site optimization for robust, easy-to-manage, and professional WordPress websites.</p>
+                <a href="#">View More</a> <!-- Updated text -->
+            </div>
+            <div class="service-card">
+                <i class="service-icon fa-solid fa-magnifying-glass-chart"></i>
+                <h2>SEO Optimization</h2>
+                <p>Implementing effective search engine optimization strategies to improve your visibility, drive organic traffic, and increase engagement.</p>
+                <a href="#">View More</a> <!-- Updated text -->
+            </div>
+            <div class="service-card">
+                <i class="service-icon fa-solid fa-cloud"></i>
+                <h2>Cloud Integration</h2>
+                <p>Setting up and managing cloud services (like Firebase/AWS) for secure data storage, authentication, and efficient application hosting.</p>
+                <a href="#">View More</a> <!-- Updated text -->
+            </div>
+        </div>
+    </section>
 
-            <!-- Home Content (Text/Buttons) - Order 2 on Mobile, 1 on Desktop -->
-            <div class="home-content order-2 md:order-1 space-y-6 text-center md:text-left">
-                <h1 class="text-5xl lg:text-7xl font-bold">Hi, It's <span class="text-primary-red">Hamza Labz</span></h1>
-                <h3 class="typing-text text-3xl lg:text-4xl font-semibold">I'm a <span class="text-accent-purple" id="typing-output"></span></h3>
-                <p class="text-lg text-gray-400 max-w-xl mx-auto md:mx-0">Welcome to Hamza Labz – where creativity meets expertise. Explore my projects, designs, and innovations that reflect passion, skill, and dedication. From web and graphic design to digital solutions, discover how I turn ideas into impactful experiences.</p>
+    <!-- 3. Skills Section -->
+    <section class="skills" id="skills">
+        <h2 class="heading">My <span>Skills</span></h2>
+        <div class="skills-container">
+            <div class="skill-box">
+                <i class="fa-brands fa-html5"></i>
+                <h3>Web Development</h3>
+                <p>Expertise in HTML5, CSS3, JavaScript, and modern frameworks like React and Vue for building dynamic and responsive web applications.</p>
+            </div>
+            <div class="skill-box">
+                <i class="fa-solid fa-paintbrush"></i>
+                <h3>Graphic Design</h3>
+                <p>Proficient in Adobe Suite (Photoshop, Illustrator) for creating stunning visual content, branding, and user interface designs.</p>
+            </div>
+            <div class="skill-box">
+                <i class="fa-solid fa-code"></i>
+                <h3>Backend & Database</h3>
+                <p>Experience with Node.js, Python, and SQL/NoSQL databases (like Firebase/Firestore) for robust and scalable backend solutions.</p>
+            </div>
+        </div>
+    </section>
 
-                <div class="social-icons flex justify-center md:justify-start space-x-6 pt-4">
-                    <a href="https://facebook.com/hamzalabzz" target="_blank" class="social-icon-link w-12 h-12 flex items-center justify-center rounded-full text-white text-2xl bg-primary-red hover:bg-accent-purple">
-                        <i class="fa-brands fa-facebook"></i>
-                    </a>
-                    <a href="https://www.instagram.com/hamzalabzz" target="_blank" class="social-icon-link w-12 h-12 flex items-center justify-center rounded-full text-white text-2xl bg-primary-red hover:bg-accent-purple">
-                        <i class="fa-brands fa-instagram"></i>
-                    </a>
+    <!-- 4. Experience Section -->
+    <section class="experience" id="experience">
+        <h2 class="heading">My <span>Experience</span></h2>
+        <div class="timeline-items">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2024 - Present</div>
+                <div class="timeline-content">
+                    <h3>Senior Web Developer | Tech Solutions Inc.</h3>
+                    <p>Led a team of 4 developers on the redesign of the company's main e-commerce platform, resulting in a 20% increase in conversion rate.</p>
                 </div>
-
-                <!-- Button Section - Only 'Hire Me' button remains -->
-                <div class="pt-6 flex justify-center md:justify-start space-x-4">
-                    <a href="#contact" class="btn-primary inline-block text-white text-lg px-8 py-3 rounded-full font-medium shadow-lg hover:shadow-accent-purple/50 nav-link">Hire Me</a>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2022 - 2024</div>
+                <div class="timeline-content">
+                    <h3>Junior Graphic Designer | Creative Hub</h3>
+                    <p>Developed branding packages and marketing materials for over 30 clients, enhancing their digital presence and market visibility.</p>
                 </div>
             </div>
-
-            <!-- Home Image (Logo) -->
-            <div class="home-img order-1 md:order-2 flex justify-center items-center">
-                <!-- Hamza Labz Logo Placeholder -->
-                <img src="Hamza Labz Logo.png" 
-                     alt="Hamza Labz Logo" 
-                     class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg rounded-full shadow-2xl shadow-accent-purple/50 object-cover border-4 border-accent-purple/50"
-                     onerror="this.onerror=null;this.src='https://placehold.co/450x450/1e293b/a855f7?text=Logo+Error';">
-            </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="py-20 px-8 bg-gray-900">
-        <h2 class="text-4xl font-bold text-center mb-12 text-primary-red">My Services</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            
-            <!-- Service 1 -->
-            <div class="service-card p-6 bg-gray-800 rounded-xl shadow-xl hover:shadow-accent-purple/30 transition duration-300 space-y-4">
-                <div class="text-4xl text-accent-purple mb-3"><i class="fas fa-desktop"></i></div>
-                <h3 class="text-2xl font-semibold text-white">Web Design & Development</h3>
-                <p class="text-gray-400">Crafting responsive, modern, and high-performance websites using the latest technologies like React, Angular, and Tailwind CSS.</p>
-                <a href="#" class="text-primary-red hover:text-accent-purple font-medium inline-flex items-center">
-                    Read More <i class="fas fa-arrow-right ml-2 text-sm"></i>
-                </a>
+    <!-- 5. Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="heading">Contact <span>Me</span></h2>
+        <form id="whatsappForm">
+            <div class="input-box">
+                <input type="text" name="fullName" placeholder="Full Name" required>
+                <input type="email" name="email" placeholder="Email Address" required>
             </div>
-
-            <!-- Service 2 -->
-            <div class="service-card p-6 bg-gray-800 rounded-xl shadow-xl hover:shadow-accent-purple/30 transition duration-300 space-y-4">
-                <div class="text-4xl text-accent-purple mb-3"><i class="fas fa-palette"></i></div>
-                <h3 class="text-2xl font-semibold text-white">Graphic Design & Branding</h3>
-                <p class="text-gray-400">Creating unique visual identities, logos, brochures, and digital assets that resonate with your target audience and brand values.</p>
-                <a href="#" class="text-primary-red hover:text-accent-purple font-medium inline-flex items-center">
-                    Read More <i class="fas fa-arrow-right ml-2 text-sm"></i>
-                </a>
+            <div class="input-box">
+                <input type="number" name="mobile" placeholder="Mobile Number"> 
+                <input type="text" name="subject" placeholder="Inquiry Subject" required>
             </div>
-
-            <!-- Service 3 -->
-            <div class="service-card p-6 bg-gray-800 rounded-xl shadow-xl hover:shadow-accent-purple/30 transition duration-300 space-y-4">
-                <div class="text-4xl text-accent-purple mb-3"><i class="fas fa-bullhorn"></i></div>
-                <h3 class="text-2xl font-semibold text-white">Digital Marketing Strategy</h3>
-                <p class="text-gray-400">Developing effective digital strategies, including SEO, content marketing, and social media management to boost your online presence.</p>
-                <a href="#" class="text-primary-red hover:text-accent-purple font-medium inline-flex items-center">
-                    Read More <i class="fas fa-arrow-right ml-2 text-sm"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Skills Section Placeholder -->
-    <section id="skills" class="py-20 px-8">
-        <h2 class="text-4xl font-bold text-center mb-12 text-primary-red">Skills</h2>
-        <p class="text-center text-gray-400 max-w-3xl mx-auto">This section will showcase technical proficiencies in Web Development (HTML, CSS, JS, React), Design Tools (Photoshop, Illustrator), and other relevant skills.</p>
-        <!-- Add skill bars/icons here -->
-    </section>
-
-    <!-- Education Section Placeholder -->
-    <section id="education" class="py-20 px-8 bg-gray-900">
-        <h2 class="text-4xl font-bold text-center mb-12 text-primary-red">Education</h2>
-        <p class="text-center text-gray-400 max-w-3xl mx-auto">This section will list academic qualifications, degrees, and relevant certifications.</p>
-        <!-- Add education timeline here -->
-    </section>
-
-    <!-- Experience Section Placeholder -->
-    <section id="experience" class="py-20 px-8">
-        <h2 class="text-4xl font-bold text-center mb-12 text-primary-red">Experience</h2>
-        <p class="text-center text-gray-400 max-w-3xl mx-auto">This section will detail professional experience, internships, and project work in a timeline format.</p>
-        <!-- Add experience timeline here -->
-    </section>
-
-    <!-- CONTACT SECTION -->
-    <section id="contact" class="py-20 px-8 bg-gray-900">
-        <h2 class="text-4xl font-bold text-center mb-12 text-primary-red">Contact <span class="text-white">Me</span></h2>
-        <div class="max-w-lg mx-auto p-6 bg-gray-800 rounded-xl shadow-2xl shadow-accent-purple/20">
-            <form id="whatsappForm" class="space-y-6">
-                <!-- Full Name -->
-                <input type="text" name="fullName" placeholder="Full Name" required
-                    class="w-full p-4 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-accent-purple focus:border-transparent transition duration-300">
-
-                <!-- Email Address -->
-                <input type="email" name="email" placeholder="Email Address" required
-                    class="w-full p-4 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-accent-purple focus:border-transparent transition duration-300">
-
-                <!-- Mobile Number (Optional) -->
-                <input type="tel" name="mobile" placeholder="Mobile Number (Optional)"
-                    class="w-full p-4 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-accent-purple focus:border-transparent transition duration-300">
-
-                <!-- Email Subject -->
-                <input type="text" name="subject" placeholder="Inquiry Subject" required
-                    class="w-full p-4 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-accent-purple focus:border-transparent transition duration-300">
-
-                <!-- Your Message -->
-                <textarea name="message" cols="30" rows="5" placeholder="Your Message" required
-                    class="w-full p-4 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-accent-purple focus:border-transparent transition duration-300"></textarea>
-
-                <!-- Send Message Button -->
-                <button type="submit" class="btn-primary w-full text-white text-xl py-3 rounded-full font-bold uppercase tracking-wider shadow-lg">
-                    Send Message (via WhatsApp)
-                </button>
-            </form>
-            <div id="contact-message" class="mt-4 text-center text-gray-300 hidden"></div>
-        </div>
+            <textarea name="message" cols="30" rows="10" placeholder="Your Message" required></textarea>
+            <button type="submit" class="btn">Send Message via WhatsApp <i class="fa-brands fa-whatsapp"></i></button>
+        </form>
     </section>
 
     <!-- Footer -->
-    <footer class="py-6 px-8 text-center text-sm text-gray-500 border-t border-gray-800">
-        <p>&copy; 2024 Hamza Labz. All Rights Reserved.</p>
+    <footer class="footer">
+        <div class="footer-text">
+            <p>Copyright &copy; 2025 by Hamza Labz | All Rights Reserved.</p>
+        </div>
     </footer>
 
-    <!-- JavaScript for Smooth Scrolling, Typing Effect, Menu Toggle, and WhatsApp -->
     <script>
-        // --- 1. Typing Effect Script ---
-        const textArray = ["Web Designer", "Frontend Developer", "Digital Marketer", "Graphic Designer"];
-        let textArrayIndex = 0;
-        let charIndex = 0;
-        const typingElement = document.getElementById('typing-output');
-        const typingDelay = 100;
-        const erasingDelay = 50;
-        const newTextDelay = 2000;
-
-        function type() {
-            if (charIndex < textArray[textArrayIndex].length) {
-                if (!typingElement.classList.contains('typing')) typingElement.classList.add('typing');
-                typingElement.textContent += textArray[textArrayIndex].charAt(charIndex);
-                charIndex++;
-                setTimeout(type, typingDelay);
-            } else {
-                typingElement.classList.remove('typing');
-                setTimeout(erase, newTextDelay);
-            }
-        }
-
-        function erase() {
-            if (charIndex > 0) {
-                if (!typingElement.classList.contains('typing')) typingElement.classList.add('typing');
-                typingElement.textContent = textArray[textArrayIndex].substring(0, charIndex - 1);
-                charIndex--;
-                setTimeout(erase, erasingDelay);
-            } else {
-                typingElement.classList.remove('typing');
-                textArrayIndex++;
-                if (textArrayIndex >= textArray.length) textArrayIndex = 0;
-                setTimeout(type, typingDelay + 1100);
-            }
-        }
-
-        // Start the typing sequence
-        document.addEventListener("DOMContentLoaded", function () {
-            if (textArray.length) setTimeout(type, newTextDelay + 250);
-        });
-
-        // --- 2. Mobile Menu Toggle Script ---
+        // --- Mobile Menu Toggle Script ---
+        const nav = document.querySelector('nav');
         const menuIcon = document.getElementById('menu-icon');
-        const navLinks = document.getElementById('nav-links');
 
         function toggleMenu() {
-            navLinks.classList.toggle('open');
-            // Update icon appearance (bars <-> times)
+            nav.classList.toggle('active');
             const icon = menuIcon.querySelector('i');
-            if (navLinks.classList.contains('open')) {
+            // Toggle between fa-bars (hamburger) and fa-xmark (close)
+            if (nav.classList.contains('active')) {
                 icon.classList.remove('fa-bars');
                 icon.classList.add('fa-xmark');
             } else {
@@ -311,59 +788,98 @@
                 icon.classList.add('fa-bars');
             }
         }
-
+        
         if (menuIcon) {
             menuIcon.addEventListener('click', toggleMenu);
         }
 
-        // --- 3. Smooth Scrolling Script (Ensures cross-browser support) ---
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                // Check if the link is a navigation link
-                if (this.classList.contains('nav-link') || this.parentElement.classList.contains('btn-box')) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
+        // --- Typing Effect Script ---
+        const typingTextElement = document.querySelector('.typing-text span');
+        const words = ["Digital creator", "Web Developer", "Web Designer", "Graphics Designer", "Wordpress Developer"];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
 
-                    if (targetElement) {
-                        // Scroll to the element smoothly
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                        
-                        // Close mobile menu after clicking a link
-                        if (window.innerWidth < 768 && navLinks.classList.contains('open')) {
-                            toggleMenu();
-                        }
+        function type() {
+            const currentWord = words[wordIndex];
+            const display = isDeleting
+                ? currentWord.substring(0, charIndex)
+                : currentWord.substring(0, charIndex + 1);
+
+            typingTextElement.textContent = display;
+
+            if (!isDeleting && charIndex < currentWord.length) {
+                charIndex++;
+                setTimeout(type, 100);
+            } else if (isDeleting && charIndex > 0) {
+                charIndex--;
+                setTimeout(type, 50);
+            } else {
+                isDeleting = !isDeleting;
+                if (!isDeleting) {
+                    wordIndex = (wordIndex + 1) % words.length;
+                }
+                setTimeout(type, isDeleting ? 1000 : 200);
+            }
+        }
+
+        // --- Active Section and Smooth Scroll Logic ---
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('header nav a');
+
+        function updateActiveLink() {
+            sections.forEach(sec => {
+                const top = window.scrollY;
+                // Offset calculation adjusted for fixed header height (around 80px)
+                const offset = sec.offsetTop - 150; 
+                const height = sec.offsetHeight;
+                const id = sec.getAttribute('id');
+
+                if (top >= offset && top < offset + height) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    const targetLink = document.querySelector('header nav a[href*=' + id + ']');
+                    if (targetLink) {
+                        targetLink.classList.add('active');
+                    }
+                }
+            });
+        }
+        
+        // --- Event Listeners and Initialization ---
+        
+        // Hide navigation and update icon when a link is clicked (mobile)
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 995) {
+                    // Check if the menu is open before closing
+                    if (nav.classList.contains('active')) {
+                         // Only call toggleMenu if the menu is actually open
+                        toggleMenu();
                     }
                 }
             });
         });
 
-        // --- 4. WhatsApp Form Submission Script ---
-        const whatsappForm = document.getElementById('whatsappForm');
-        const contactMessage = document.getElementById('contact-message');
+        window.onload = () => {
+            type();
+            updateActiveLink();
+            // Scroll to the home section on initial load 
+            document.getElementById('home').scrollIntoView();
+        };
 
-        /**
-         * IMPORTANT: REPLACE THIS PLACEHOLDER WITH YOUR ACTUAL WHATSAPP NUMBER.
-         * Format: Country Code + Area Code + Number (e.g., 15551234567). NO leading +, spaces, or dashes.
-         */
-        const WHATSAPP_NUMBER = '+94727067046'; 
+        window.onscroll = updateActiveLink;
+        
+        // ==========================================================
+        // WhatsApp Form Submission Logic
+        // ==========================================================
+        const whatsappForm = document.getElementById('whatsappForm');
+        const WHATSAPP_NUMBER = '+94727067046'; // Placeholder: Replace with your actual WhatsApp number (e.g., '15551234567')
 
         if (whatsappForm) {
-            whatsappForm.addEventListener('submit', function (e) {
+            whatsappForm.addEventListener('submit', function(e) {
                 e.preventDefault(); 
-
-                contactMessage.classList.add('hidden'); // Hide previous messages
-
-                if (!WHATSAPP_NUMBER) {
-                    contactMessage.textContent = 'ERROR: WhatsApp number is not configured in the script. Please set the WHATSAPP_NUMBER variable.';
-                    contactMessage.classList.remove('hidden');
-                    contactMessage.classList.remove('text-green-400');
-                    contactMessage.classList.add('text-red-400');
-                    return; // Stop execution if number is missing
-                }
 
                 const fullName = this.querySelector('[name="fullName"]').value;
                 const email = this.querySelector('[name="email"]').value;
@@ -371,31 +887,17 @@
                 const subject = this.querySelector('[name="subject"]').value;
                 const message = this.querySelector('[name="message"]').value;
 
-                // 1. Construct the message body, using * for bold in WhatsApp
+                // 1. Construct the message body
                 const whatsappMessage = `*New Contact Form Submission from Portfolio*\n\n*Name:* ${fullName}\n*Email:* ${email}\n*Mobile:* ${mobile || 'N/A'}\n*Subject:* ${subject}\n\n*Message:*\n${message}`;
 
-                // 2. URL encode the message to ensure it's transmitted correctly
+                // 2. URL encode the message
                 const encodedMessage = encodeURIComponent(whatsappMessage);
 
                 // 3. Construct the final WhatsApp API URL
                 const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
 
-                // 4. Show a quick confirmation message and redirect
-                contactMessage.textContent = 'Redirecting to WhatsApp...';
-                contactMessage.classList.remove('hidden');
-                contactMessage.classList.remove('text-red-400');
-                contactMessage.classList.add('text-gray-300');
-
-                // 5. Redirect the user to WhatsApp in a new tab
+                // 4. Redirect the user to WhatsApp in a new tab
                 window.open(whatsappUrl, '_blank');
-                
-                // Optional: Clear form after redirection, ensuring UX is smooth
-                setTimeout(() => {
-                    whatsappForm.reset();
-                    contactMessage.textContent = 'Message initiated! Check your WhatsApp window.';
-                    contactMessage.classList.remove('text-gray-300');
-                    contactMessage.classList.add('text-green-400');
-                }, 1000);
             });
         }
     </script>
