@@ -8,12 +8,16 @@
     <title>Hamza Labz | Portfolio</title>
     
     <style>
-        /* Define the new primary accent color based on the logo */
+        /*
+         * NEW REDESIGN COLOR PALETTE & VARIABLES
+         */
         :root {
             --primary-accent: #8A2BE2; /* Electric Purple */
             --secondary-accent: #a855f7; /* For softer shadows/gradients */
-            --bg-dark: #000000;
-            --bg-light: #161616;
+            --bg-dark: #0A0A0A; /* Deep Dark Background */
+            --bg-light: #1A1A1A; /* Card/Section Background */
+            --text-color: #FFFFFF;
+            --text-muted: #CCCCCC;
         }
 
         /*
@@ -41,41 +45,42 @@
         body {
             width: 100%;
             overflow-x: hidden;
-            background-color: var(--bg-dark);
-            color: white;
+            background-color: var(--bg-dark); /* Applied new deep dark color */
+            color: var(--text-color);
         }
 
         section {
             min-height: 100vh;
-            padding: 10rem 9% 5rem;
+            padding: 10rem 9% 10rem;
         }
 
         .heading {
             text-align: center;
             font-size: 4.5rem;
             margin-bottom: 5rem;
+            font-weight: 700;
         }
 
         span {
             color: var(--primary-accent);
         }
 
-        /* Header & Navigation */
+        /* Header & Navigation (Added Glass effect) */
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             padding: 2rem 9%;
-            background-color: rgba(0, 0, 0, 0.95); /* Slightly darker background for prominence */
-            border-bottom: 1px solid rgba(138, 43, 226, 0.2); /* Purple border */
+            background-color: rgba(10, 10, 10, 0.95); /* Use new dark color */
+            backdrop-filter: blur(10px); /* Glass effect */
+            border-bottom: 1px solid rgba(138, 43, 226, 0.1); /* Lighter border */
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 100;
         }
         
-        /* Logo Container for Image + Text */
         .logo-container {
             display: flex;
             align-items: center;
@@ -85,7 +90,7 @@
         }
 
         .header-logo {
-            height: 4rem; /* Standard size */
+            height: 4rem;
             width: 4rem;
             border-radius: 50%;
             object-fit: cover;
@@ -95,14 +100,15 @@
         }
         
         .logo-text {
-            font-size: 3rem; /* Standard size */
+            font-size: 3rem;
             color: var(--primary-accent);
             font-weight: 800;
             transition: 0.5s ease;
         }
 
         .logo-container:hover .logo-text {
-            transform: scale(1.05);
+            transform: scale(1.03);
+            text-shadow: 0 0 10px var(--secondary-accent);
         }
         .logo-container:hover .header-logo {
             box-shadow: 0 0 20px var(--primary-accent);
@@ -110,17 +116,33 @@
 
         nav a {
             font-size: 1.8rem;
-            color: white;
+            color: var(--text-color);
             margin-left: 4rem;
             font-weight: 500;
             transition: 0.3s ease;
-            border-bottom: 3px solid transparent;
+            position: relative;
+        }
+        
+        /* Underline effect for navigation */
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background: var(--primary-accent);
+            left: 0;
+            bottom: -5px;
+            transition: width 0.3s ease;
         }
 
         nav a:hover,
         nav a.active {
             color: var(--primary-accent);
-            border-bottom: 3px solid var(--primary-accent);
+        }
+        
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
         }
 
         /* Mobile Navigation Toggle (Hamburger/Close Icon) */
@@ -128,27 +150,21 @@
             font-size: 3rem;
             color: var(--primary-accent); 
             cursor: pointer;
-            display: none; /* Hidden on desktop */
+            display: none;
             padding: 0.5rem; 
             border-radius: 0.5rem;
             transition: 0.3s ease;
             z-index: 101; 
         }
-        
-        /* Removed background and shadow on hover for hamburger icon */
-        #menu-icon:hover {
-            color: white; /* Keep color change on hover */
-        }
 
         /* Responsive Adjustments for Header */
         @media(max-width:995px) {
-            /* Increase padding on mobile header for better spacing */
             header {
                 padding: 2rem 5%; 
             }
             
             #menu-icon {
-                display: block; /* Show on mobile */
+                display: block;
             }
 
             nav {
@@ -173,7 +189,6 @@
                 transform: translateX(0);
             }
             
-            /* Add padding to the top of the mobile nav menu to avoid overlapping fixed header content */
             nav a:first-child { 
                 margin-top: 10rem; 
             }
@@ -186,36 +201,37 @@
                 text-align: center;
             }
 
-            nav a:hover,
-            nav a.active {
-                background-color: rgba(138, 43, 226, 0.1);
-                border-radius: 0.5rem;
-                border-bottom: 3px solid var(--primary-accent);
+            nav a:hover::after,
+            nav a.active::after {
+                width: 80%;
+                left: 10%;
             }
         }
         
-        /* Optimization for very small mobile screens (Logo size adjustment) */
         @media(max-width:600px) {
             header {
-                padding: 1.5rem 4%; /* Reduce vertical padding slightly */
+                padding: 1.5rem 4%;
             }
             .logo-text {
-                font-size: 2.5rem; /* Reduce font size for better fit */
+                font-size: 2.5rem;
             }
             .header-logo {
                 height: 3.5rem; 
                 width: 3.5rem;
             }
+            section {
+                padding: 8rem 5% 8rem; /* Adjusted section padding for small screens */
+            }
         }
         
         /* Home Section Styles */
         .home {
-            padding-top: 15rem; /* More space now that image is removed */
+            padding-top: 15rem;
             display: flex;
             justify-content: center;
             align-items: center;
-            text-align: center; /* Center content */
-            min-height: calc(100vh - 80px); /* Fill remaining viewport height */
+            text-align: center;
+            min-height: calc(100vh - 80px);
         }
 
         .home-content {
@@ -235,69 +251,67 @@
         }
 
         .home-content p {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             max-width: 600px;
-            margin: 0 auto 2rem; /* Center paragraph */
+            margin: 0 auto 2rem;
+            color: var(--text-muted);
         }
 
         .social-icons {
             display: flex;
-            justify-content: center; /* Center icons */
+            justify-content: center;
         }
         
         .social-icons a {
             display: inline-flex;
             justify-content: center;
             align-items: center;
-            width: 4.4rem;
-            height: 4.4rem;
-            background-color: transparent;
+            width: 4.8rem; /* Slightly larger icons */
+            height: 4.8rem;
+            background-color: var(--bg-light); /* Darker background for contrast */
             border: 0.2rem solid var(--primary-accent);
-            font-size: 2rem;
+            font-size: 2.2rem;
             border-radius: 50%;
             margin: 3rem 1.5rem 3rem 0;
-            transition: 0.3s ease;
+            transition: 0.4s ease;
             color: var(--primary-accent);
+            box-shadow: 0 0 5px rgba(138, 43, 226, 0.5); /* Subtle initial shadow */
         }
 
         .social-icons a:hover {
-            color: black;
-            transform: scale(1.2) translateY(-5px);
+            color: var(--bg-dark); /* Dark text on hover */
+            transform: scale(1.1) translateY(-3px);
             background-color: var(--primary-accent);
-            box-shadow: 0 0 25px var(--primary-accent);
+            box-shadow: 0 0 35px var(--primary-accent); /* Stronger glow on hover */
         }
 
-        /* Hire Me Button (Filled with color) */
+        /* Hire Me Button (Redesigned) */
         .btn {
             display: inline-block;
-            padding: 1.2rem 3rem; /* Slightly larger button */
-            
-            /* NEW: Set background to primary accent and text to black */
-            background-color: var(--primary-accent); 
-            color: var(--bg-dark); 
-            
-            border-radius: 4rem;
-            font-size: 1.8rem; /* Slightly larger font */
-            letter-spacing: 0.2rem;
+            padding: 1.4rem 3.5rem; /* Larger padding */
+            background-color: var(--primary-accent);
+            color: var(--bg-dark);
+            border-radius: 5rem; /* More rounded pill shape */
+            font-size: 1.8rem;
+            letter-spacing: 0.1rem;
             font-weight: 600;
-            border: 2px solid var(--primary-accent); /* Maintain border for hover effect */
-            transition: 0.3s ease;
+            border: 2px solid var(--primary-accent);
+            transition: 0.4s ease;
             cursor: pointer;
-            box-shadow: 0 0 10px var(--primary-accent);
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.5); /* Stronger initial glow */
         }
 
         .btn:hover {
-            transform: scale(1.03);
-            /* On hover, increase shadow intensity and lighten background slightly */
+            transform: scale(1.05);
             background-color: var(--secondary-accent);
-            box-shadow: 0 0 35px var(--primary-accent);
+            box-shadow: 0 0 45px var(--primary-accent); /* Intense glow on hover */
         }
 
         /* Typing Text Animation */
         .typing-text {
             font-size: 3.4rem;
             font-weight: 600;
-            min-width: 280px;
+            min-height: 40px; /* Prevent layout shift */
         }
 
         .typing-text span {
@@ -307,7 +321,7 @@
 
         .typing-text span::after {
             content: "";
-            background-color: var(--bg-dark);
+            background-color: var(--bg-dark); /* Use the new deep dark background color */
             position: absolute;
             width: 8px;
             height: 100%;
@@ -322,7 +336,6 @@
             }
         }
         
-        /* Responsive Home Section */
         @media (max-width: 1000px) {
             .home {
                 padding-top: 10rem;
@@ -337,9 +350,12 @@
             .home-content h1 {
                 font-size: 5rem;
             }
+            .typing-text {
+                font-size: 3rem;
+            }
         }
         
-        /* Services Section Styles */
+        /* Services Section Styles (Card Redesign) */
         .services {
             padding-top: 10rem;
         }
@@ -351,37 +367,38 @@
         
         .services-intro p {
             font-size: 1.8rem;
-            color: #ccc;
+            color: var(--text-muted);
         }
 
         .services-grid {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 3rem;
-            padding: 0 9%;
+            gap: 3.5rem; /* Increased gap for breathing room */
+            padding: 0 5%;
         }
 
         .service-card {
-            background-color: var(--bg-light);
+            background-color: var(--bg-light); /* New lighter background for card */
             width: 350px;
             text-align: center;
-            padding: 3rem 2.5rem;
-            border-radius: 1rem;
-            box-shadow: 0 0 25px rgba(138, 43, 226, 0.2);
-            border: 2px solid rgba(138, 43, 226, 0.5);
-            transition: transform 0.3s, box-shadow 0.3s;
-            color: white;
+            padding: 4rem 3rem; /* Increased padding inside cards */
+            border-radius: 1.5rem; /* More rounded corners */
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5); /* Subtle dark shadow */
+            border: none; /* Removed heavy border */
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            color: var(--text-color);
         }
 
         .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 0 40px var(--primary-accent);
+            transform: translateY(-8px);
+            /* Purple glow effect on hover */
+            box-shadow: 0 10px 40px rgba(138, 43, 226, 0.3); 
         }
         
         .service-card a {
             color: var(--primary-accent);
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             font-weight: 600;
             display: inline-block;
             margin-top: 1.5rem;
@@ -395,74 +412,76 @@
 
 
         .service-icon {
-            font-size: 4rem;
+            font-size: 5rem; /* Larger icon */
             margin-bottom: 2rem;
             color: var(--primary-accent);
         }
 
         .service-card h2 {
-            font-size: 2.2rem;
+            font-size: 2.4rem; /* Larger header */
             margin-bottom: 1.5rem;
-            color: white;
+            font-weight: 600;
         }
 
         .service-card p {
             font-size: 1.6rem;
-            color: #ccc;
-            line-height: 1.5;
+            color: var(--text-muted);
+            line-height: 1.6;
         }
 
         @media (max-width: 768px) {
             .service-card {
                 width: 100%;
-                max-width: 350px;
+                max-width: 400px;
             }
         }
 
 
-        /* Skills Section Styles */
+        /* Skills Section Styles (Card Redesign) */
         .skills-container {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 3rem;
+            gap: 3.5rem; /* Increased gap */
         }
 
         .skill-box {
             background: var(--bg-light);
-            padding: 3rem 2rem 4rem;
-            border-radius: 1rem;
+            padding: 4rem 3rem;
+            border-radius: 1.5rem;
             text-align: center;
-            border: .2rem solid var(--primary-accent);
-            transition: .5s ease;
+            border: none; /* Removed heavy border */
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5); /* Subtle dark shadow */
+            transition: 0.4s ease;
             max-width: 350px;
         }
 
         .skill-box:hover {
-            border-color: #fff;
+            border-color: var(--primary-accent);
             transform: scale(1.05);
-            box-shadow: 0 0 25px var(--primary-accent);
+            box-shadow: 0 10px 40px rgba(138, 43, 226, 0.3); /* Purple glow on hover */
         }
 
         .skill-box i {
-            font-size: 5rem;
+            font-size: 6rem; /* Larger icon */
             color: var(--primary-accent);
             margin-bottom: 1.5rem;
         }
 
         .skill-box h3 {
-            font-size: 2.2rem;
+            font-size: 2.4rem;
             margin-bottom: 1rem;
+            font-weight: 600;
         }
 
         .skill-box p {
             font-size: 1.6rem;
-            color: #ccc;
+            color: var(--text-muted);
+            line-height: 1.6;
         }
         
-        /* Experience Section (Timeline Style) */
+        /* Experience Section (Timeline Style Refinement) */
         .experience {
-            /* Ensures section has minimum height even with less content */
             min-height: 80vh; 
         }
 
@@ -472,20 +491,21 @@
             display: flex;
             flex-direction: column;
             position: relative;
+            margin-top: 5rem; 
         }
 
         .timeline-items::before {
             content: '';
             position: absolute;
-            width: 2px;
+            width: 3px; /* Slightly thicker line */
             height: 100%;
-            background-color: var(--primary-accent);
+            background-color: rgba(138, 43, 226, 0.5); /* Softer line color */
             left: 50%;
             transform: translateX(-50%);
         }
 
         .timeline-item {
-            margin-bottom: 40px;
+            margin-bottom: 4rem; /* Increased margin for separation */
             position: relative;
             width: 100%;
         }
@@ -500,45 +520,56 @@
         }
 
         .timeline-dot {
-            height: 20px;
-            width: 20px;
+            height: 25px; /* Larger dot */
+            width: 25px;
             background-color: var(--primary-accent);
-            box-shadow: 0 0 25px var(--primary-accent);
+            box-shadow: 0 0 15px var(--primary-accent);
+            border: 3px solid var(--bg-dark); /* Contrast border */
             border-radius: 50%;
             position: absolute;
             top: 6px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 10;
+            transition: transform 0.3s;
         }
+        
+        .timeline-item:hover .timeline-dot {
+            transform: translateX(-50%) scale(1.15);
+            box-shadow: 0 0 30px var(--primary-accent);
+        }
+
 
         .timeline-date {
             font-size: 1.8rem;
             font-weight: 600;
-            color: var(--primary-accent);
-            margin-bottom: 1rem;
+            color: var(--secondary-accent); /* Use softer accent for date */
+            margin: 10px 20px;
         }
 
         .timeline-content {
             background: var(--bg-light);
-            padding: 2rem;
-            border-radius: 0.8rem;
-            border: 1px solid rgba(138, 43, 226, 0.5);
-            transition: 0.3s ease;
+            margin: 10px;
+            padding: 2.5rem; /* Increased padding */
+            border-radius: 1rem;
+            border: 1px solid rgba(138, 43, 226, 0.2); /* Lighter border */
+            transition: 0.4s ease;
         }
 
         .timeline-content:hover {
-            box-shadow: 0 0 15px var(--primary-accent);
+            box-shadow: 0 0 25px rgba(138, 43, 226, 0.3); /* Subtle glow on hover */
         }
 
         .timeline-content h3 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin-bottom: 1rem;
+            font-weight: 700;
         }
 
         .timeline-content p {
             font-size: 1.6rem;
-            color: #ccc;
+            color: var(--text-muted);
+            line-height: 1.6;
         }
 
         @media (max-width: 768px) {
@@ -547,23 +578,23 @@
             }
 
             .timeline-item {
-                padding-left: 3rem;
+                padding-left: 4rem; /* Increased padding */
                 padding-right: 0;
             }
 
             .timeline-item:nth-child(odd),
             .timeline-item:nth-child(even) {
-                padding-left: 3rem;
+                padding-left: 4rem;
                 padding-right: 0;
                 text-align: left;
             }
 
             .timeline-dot {
-                left: -1px;
+                left: -12.5px; /* Adjust to match new line width */
             }
         }
 
-        /* Contact Section Styles */
+        /* Contact Section Styles (Input Redesign) */
         .contact form {
             max-width: 70rem;
             margin: 1rem auto;
@@ -581,26 +612,36 @@
         .contact form textarea {
             width: 100%;
             padding: 1.5rem;
-            font-size: 1.6rem;
-            color: white;
+            font-size: 1.7rem;
+            color: var(--text-color);
             background: var(--bg-light);
             border-radius: 0.8rem;
             margin: 0.7rem 0;
-            border: 1px solid var(--primary-accent);
+            border: 1px solid rgba(138, 43, 226, 0.4); /* Softer input border */
+            transition: 0.3s ease;
             resize: none;
+        }
+        
+        .contact form .input-box input::placeholder,
+        .contact form textarea::placeholder {
+            color: var(--text-muted);
         }
 
         .contact form .input-box input:focus,
         .contact form textarea:focus {
-            box-shadow: 0 0 10px var(--primary-accent);
-        }
-
-        .contact form .input-box input:nth-child(2) {
-            margin-right: 1rem;
+            border-color: var(--primary-accent);
+            box-shadow: 0 0 10px rgba(138, 43, 226, 0.7);
         }
 
         .contact form .input-box input {
             width: 49%;
+        }
+
+        @media (max-width: 600px) {
+            .contact form .input-box input {
+                width: 100%;
+                margin: 0.7rem 0;
+            }
         }
 
         .contact form textarea {
@@ -609,42 +650,29 @@
 
         .contact form .btn {
             margin-top: 2rem;
-            /* Ensure the button uses the correct WhatsApp styling */
-            background-color: #25D366; /* WhatsApp Green */
+            /* WhatsApp Button Style */
+            background-color: #25D366; 
             color: white;
             border-color: #25D366;
-            transition: all 0.3s ease;
-            padding: 1rem 2.8rem; /* Adjusted for contact button */
-            font-size: 1.6rem;
-            /* Reset button shadow for consistency */
-            box-shadow: 0 0 10px rgba(37, 211, 102, 0.5); 
+            box-shadow: 0 0 15px rgba(37, 211, 102, 0.6); 
         }
         
         .contact form .btn:hover {
             background-color: #128C7E;
-            color: white;
-            box-shadow: 0 0 25px #25D366;
+            border-color: #128C7E;
+            box-shadow: 0 0 30px #25D366;
         }
-
-        /* Mobile specific style for the contact button */
-        @media (max-width: 480px) {
-            .contact form .btn {
-                padding: 0.8rem 2rem; /* Make button smaller on small phones */
-                font-size: 1.4rem;
-            }
-        }
-        
 
         /* Footer Styles */
         .footer {
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 2rem 9%;
+            padding: 2.5rem 9%;
             background: var(--bg-light);
-            color: white;
+            color: var(--text-muted);
             font-size: 1.6rem;
-            border-top: 1px solid rgba(138, 43, 226, 0.2);
+            border-top: 1px solid rgba(138, 43, 226, 0.1);
         }
 
         .footer p {
@@ -702,43 +730,25 @@
             <p>Turning creative visions into technical realities. I offer comprehensive solutions across design, development, and digital marketing.</p>
         </div>
 
-        <!-- Services Grid -->
+        <!-- Services Grid - Only showing Branding, WordPress, and SEO as requested -->
         <div class="services-grid">
-            <div class="service-card">
-                <i class="service-icon fa-solid fa-laptop-code"></i>
-                <h2>Full Stack Web Development</h2>
-                <p>From initial concept and design to deployment, I build complete, scalable, and high-performance web applications using modern technologies.</p>
-                <a href="#">View projects</a> <!-- Updated text -->
-            </div>
             <div class="service-card">
                 <i class="service-icon fa-solid fa-palette"></i>
                 <h2>Branding & Graphic Design</h2>
                 <p>Developing compelling brand identities, logos, and visual materials that communicate your message clearly and professionally across all platforms.</p>
-                <a href="#">View projects</a> <!-- Updated text -->
-            </div>
-            <div class="service-card">
-                <i class="service-icon fa-solid fa-mobile-screen-button"></i>
-                <h2>Responsive UI/UX Design</h2>
-                <p>Creating intuitive, user-friendly interfaces and experiences that look and function perfectly on desktops, tablets, and mobile devices.</p>
-                <a href="#">View projects</a> <!-- Updated text -->
+                <a href="#">View More</a>
             </div>
             <div class="service-card">
                 <i class="service-icon fa-solid fa-wordpress"></i>
                 <h2>WordPress Development</h2>
                 <p>Custom theme development, plugin integration, and site optimization for robust, easy-to-manage, and professional WordPress websites.</p>
-                <a href="#">View projects</a> <!-- Updated text -->
+                <a href="#">View More</a>
             </div>
             <div class="service-card">
                 <i class="service-icon fa-solid fa-magnifying-glass-chart"></i>
                 <h2>SEO Optimization</h2>
                 <p>Implementing effective search engine optimization strategies to improve your visibility, drive organic traffic, and increase engagement.</p>
-                <a href="#">View projects</a> <!-- Updated text -->
-            </div>
-            <div class="service-card">
-                <i class="service-icon fa-solid fa-cloud"></i>
-                <h2>Cloud Integration</h2>
-                <p>Setting up and managing cloud services (like Firebase/AWS) for secure data storage, authentication, and efficient application hosting.</p>
-                <a href="#">View projects</a> <!-- Updated text -->
+                <a href="#">View More</a>
             </div>
         </div>
     </section>
@@ -747,6 +757,7 @@
     <section class="skills" id="skills">
         <h2 class="heading">My <span>Skills</span></h2>
         <div class="skills-container">
+            <!-- Retaining original skills for context -->
             <div class="skill-box">
                 <i class="fa-brands fa-html5"></i>
                 <h3>Web Development</h3>
@@ -848,6 +859,7 @@
 
         function type() {
             const currentWord = words[wordIndex];
+            // Ensure display uses the correct background for the cursor, using charIndex to control the text
             const display = isDeleting
                 ? currentWord.substring(0, charIndex)
                 : currentWord.substring(0, charIndex + 1);
@@ -881,7 +893,6 @@
                 const height = sec.offsetHeight;
                 let id = sec.getAttribute('id');
                 
-                // Add conditional check for null id to prevent errors
                 if (!id) return; 
 
                 if (top >= offset && top < offset + height) {
@@ -920,7 +931,7 @@
         // ==========================================================
         const whatsappForm = document.getElementById('whatsappForm');
         
-        // UPDATED: Using the provided tiny.cc link instead of a raw number
+        // Using the provided tiny.cc link 
         const WHATSAPP_LINK = 'http://tiny.cc/hamzalabz'; 
 
         if (whatsappForm) {
