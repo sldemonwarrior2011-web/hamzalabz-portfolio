@@ -67,24 +67,45 @@
             left: 0;
             width: 100%;
             padding: 2rem 9%;
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(0, 0, 0, 0.95); /* Slightly darker background for prominence */
             border-bottom: 1px solid rgba(138, 43, 226, 0.2); /* Purple border */
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 100;
         }
+        
+        /* Logo Container for Image + Text */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
 
-        .logo {
-            font-size: 3rem;
+        .header-logo {
+            height: 4rem; /* Standard size */
+            width: 4rem;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-accent);
+            box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+            transition: 0.3s ease;
+        }
+        
+        .logo-text {
+            font-size: 3rem; /* Standard size */
             color: var(--primary-accent);
             font-weight: 800;
-            cursor: pointer;
             transition: 0.5s ease;
         }
 
-        .logo:hover {
+        .logo-container:hover .logo-text {
             transform: scale(1.05);
+        }
+        .logo-container:hover .header-logo {
+            box-shadow: 0 0 20px var(--primary-accent);
         }
 
         nav a {
@@ -102,17 +123,28 @@
             border-bottom: 3px solid var(--primary-accent);
         }
 
-        /* Mobile Navigation Toggle */
+        /* Mobile Navigation Toggle (Hamburger/Close Icon) */
         #menu-icon {
             font-size: 3rem;
-            color: white;
+            color: var(--primary-accent); 
             cursor: pointer;
             display: none; /* Hidden on desktop */
+            padding: 0.5rem; 
+            border-radius: 0.5rem;
+            transition: 0.3s ease;
+            z-index: 101; 
         }
         
+        /* Removed background and shadow on hover for hamburger icon */
+        #menu-icon:hover {
+            color: white; /* Keep color change on hover */
+        }
+
+        /* Responsive Adjustments for Header */
         @media(max-width:995px) {
+            /* Increase padding on mobile header for better spacing */
             header {
-                padding: 2rem 5%;
+                padding: 2rem 5%; 
             }
             
             #menu-icon {
@@ -121,7 +153,7 @@
 
             nav {
                 position: fixed;
-                display: flex; /* Changed from none to flex for JS control */
+                display: flex; 
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
@@ -140,6 +172,11 @@
             nav.active {
                 transform: translateX(0);
             }
+            
+            /* Add padding to the top of the mobile nav menu to avoid overlapping fixed header content */
+            nav a:first-child { 
+                margin-top: 10rem; 
+            }
 
             nav a {
                 margin: 2rem 0;
@@ -156,15 +193,33 @@
                 border-bottom: 3px solid var(--primary-accent);
             }
         }
-
-
+        
+        /* Optimization for very small mobile screens (Logo size adjustment) */
+        @media(max-width:600px) {
+            header {
+                padding: 1.5rem 4%; /* Reduce vertical padding slightly */
+            }
+            .logo-text {
+                font-size: 2.5rem; /* Reduce font size for better fit */
+            }
+            .header-logo {
+                height: 3.5rem; 
+                width: 3.5rem;
+            }
+        }
+        
         /* Home Section Styles */
         .home {
-            padding-top: 10rem;
+            padding-top: 15rem; /* More space now that image is removed */
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 8rem;
+            text-align: center; /* Center content */
+            min-height: calc(100vh - 80px); /* Fill remaining viewport height */
+        }
+
+        .home-content {
+            max-width: 800px;
         }
 
         .home .home-content h1 {
@@ -182,28 +237,14 @@
         .home-content p {
             font-size: 1.6rem;
             max-width: 600px;
+            margin: 0 auto 2rem; /* Center paragraph */
         }
 
-        .home-img {
-            border-radius: 50%;
+        .social-icons {
+            display: flex;
+            justify-content: center; /* Center icons */
         }
-
-        .home-img img {
-            position: relative;
-            width: 25vw;
-            min-width: 280px;
-            border-radius: 50%;
-            border: 0.5rem solid var(--primary-accent);
-            box-shadow: 0 0 25px var(--primary-accent), 0 0 50px var(--secondary-accent);
-            cursor: pointer;
-            transition: 0.5s ease-in-out;
-        }
-
-        .home-img img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 50px var(--primary-accent), 0 0 100px var(--secondary-accent);
-        }
-
+        
         .social-icons a {
             display: inline-flex;
             justify-content: center;
@@ -226,25 +267,30 @@
             box-shadow: 0 0 25px var(--primary-accent);
         }
 
+        /* Hire Me Button (Filled with color) */
         .btn {
             display: inline-block;
             padding: 1.2rem 3rem; /* Slightly larger button */
-            background-color: transparent;
+            
+            /* NEW: Set background to primary accent and text to black */
+            background-color: var(--primary-accent); 
+            color: var(--bg-dark); 
+            
             border-radius: 4rem;
             font-size: 1.8rem; /* Slightly larger font */
-            color: var(--primary-accent);
             letter-spacing: 0.2rem;
             font-weight: 600;
-            border: 2px solid var(--primary-accent);
+            border: 2px solid var(--primary-accent); /* Maintain border for hover effect */
             transition: 0.3s ease;
             cursor: pointer;
+            box-shadow: 0 0 10px var(--primary-accent);
         }
 
         .btn:hover {
             transform: scale(1.03);
-            background-color: var(--primary-accent);
-            color: black;
-            box-shadow: 0 0 25px var(--primary-accent);
+            /* On hover, increase shadow intensity and lighten background slightly */
+            background-color: var(--secondary-accent);
+            box-shadow: 0 0 35px var(--primary-accent);
         }
 
         /* Typing Text Animation */
@@ -279,18 +325,11 @@
         /* Responsive Home Section */
         @media (max-width: 1000px) {
             .home {
-                gap: 4rem;
+                padding-top: 10rem;
             }
         }
 
-        @media(max-width:995px) {
-            .home {
-                flex-direction: column-reverse;
-                margin-top: 5rem;
-                padding-top: 10rem;
-                text-align: center;
-            }
-
+        @media(max-width:600px) {
             .home .home-content h3 {
                 font-size: 3rem;
             }
@@ -298,13 +337,8 @@
             .home-content h1 {
                 font-size: 5rem;
             }
-
-            .home-img img {
-                width: 70vw;
-                margin-bottom: 4rem;
-            }
         }
-
+        
         /* Services Section Styles */
         .services {
             padding-top: 10rem;
@@ -427,6 +461,11 @@
         }
         
         /* Experience Section (Timeline Style) */
+        .experience {
+            /* Ensures section has minimum height even with less content */
+            min-height: 80vh; 
+        }
+
         .timeline-items {
             max-width: 1000px;
             margin: auto;
@@ -577,6 +616,8 @@
             transition: all 0.3s ease;
             padding: 1rem 2.8rem; /* Adjusted for contact button */
             font-size: 1.6rem;
+            /* Reset button shadow for consistency */
+            box-shadow: 0 0 10px rgba(37, 211, 102, 0.5); 
         }
         
         .contact form .btn:hover {
@@ -617,10 +658,15 @@
 </head>
 
 <body>
+    <!-- Header Section -->
     <header>
-        <a href="#home" class="logo">Hamza labz</a>
+        <a href="#home" class="logo-container">
+            <!-- Image asset is used here -->
+            <img src="Hamza Labz Logo.png" alt="Hamza Labz Logo" class="header-logo" onerror="this.onerror=null; this.src='https://placehold.co/40x40/8A2BE2/ffffff?text=HL';">
+            <span class="logo-text">Hamza Labz</span>
+        </a>
         
-        <!-- Mobile Menu Icon -->
+        <!-- Mobile Menu Icon - This icon toggles between fa-bars and fa-xmark (close) via JavaScript -->
         <div id="menu-icon"><i class="fas fa-bars"></i></div>
 
         <!-- Navigation Links -->
@@ -628,7 +674,6 @@
             <a href="#home" class="active">Home</a>
             <a href="#services">Services</a>
             <a href="#skills">Skills</a>
-            <!-- Removed Education link -->
             <a href="#experience">Experience</a>
             <a href="#contact">Contact</a>
         </nav>
@@ -636,10 +681,6 @@
 
     <!-- 1. Home Section -->
     <section class="home" id="home">
-        <div class="home-img">
-            <!-- Using the uploaded logo image -->
-            <img src="Hamza Labz Logo.png" alt="Hamza Labz Logo">
-        </div>
         <div class="home-content">
             <h1>Hi, It's <span>Hamza Labz</span></h1>
             <h3 class="typing-text">I'm a <span></span></h3>
@@ -667,37 +708,37 @@
                 <i class="service-icon fa-solid fa-laptop-code"></i>
                 <h2>Full Stack Web Development</h2>
                 <p>From initial concept and design to deployment, I build complete, scalable, and high-performance web applications using modern technologies.</p>
-                <a href="#">View More</a> <!-- Updated text -->
+                <a href="#">View projects</a> <!-- Updated text -->
             </div>
             <div class="service-card">
                 <i class="service-icon fa-solid fa-palette"></i>
                 <h2>Branding & Graphic Design</h2>
                 <p>Developing compelling brand identities, logos, and visual materials that communicate your message clearly and professionally across all platforms.</p>
-                <a href="#">View More</a> <!-- Updated text -->
+                <a href="#">View projects</a> <!-- Updated text -->
             </div>
             <div class="service-card">
                 <i class="service-icon fa-solid fa-mobile-screen-button"></i>
                 <h2>Responsive UI/UX Design</h2>
                 <p>Creating intuitive, user-friendly interfaces and experiences that look and function perfectly on desktops, tablets, and mobile devices.</p>
-                <a href="#">View More</a> <!-- Updated text -->
+                <a href="#">View projects</a> <!-- Updated text -->
             </div>
             <div class="service-card">
                 <i class="service-icon fa-solid fa-wordpress"></i>
                 <h2>WordPress Development</h2>
                 <p>Custom theme development, plugin integration, and site optimization for robust, easy-to-manage, and professional WordPress websites.</p>
-                <a href="#">View More</a> <!-- Updated text -->
+                <a href="#">View projects</a> <!-- Updated text -->
             </div>
             <div class="service-card">
                 <i class="service-icon fa-solid fa-magnifying-glass-chart"></i>
                 <h2>SEO Optimization</h2>
                 <p>Implementing effective search engine optimization strategies to improve your visibility, drive organic traffic, and increase engagement.</p>
-                <a href="#">View More</a> <!-- Updated text -->
+                <a href="#">View projects</a> <!-- Updated text -->
             </div>
             <div class="service-card">
                 <i class="service-icon fa-solid fa-cloud"></i>
                 <h2>Cloud Integration</h2>
                 <p>Setting up and managing cloud services (like Firebase/AWS) for secure data storage, authentication, and efficient application hosting.</p>
-                <a href="#">View More</a> <!-- Updated text -->
+                <a href="#">View projects</a> <!-- Updated text -->
             </div>
         </div>
     </section>
@@ -775,17 +816,22 @@
         // --- Mobile Menu Toggle Script ---
         const nav = document.querySelector('nav');
         const menuIcon = document.getElementById('menu-icon');
+        const iconElement = menuIcon ? menuIcon.querySelector('i') : null; // Get the actual icon element
 
         function toggleMenu() {
+            if (!iconElement) return; // Guard clause
+
             nav.classList.toggle('active');
-            const icon = menuIcon.querySelector('i');
+            
             // Toggle between fa-bars (hamburger) and fa-xmark (close)
             if (nav.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-xmark');
+                // Menu is open: show close icon (fa-xmark)
+                iconElement.classList.remove('fa-bars');
+                iconElement.classList.add('fa-xmark');
             } else {
-                icon.classList.remove('fa-xmark');
-                icon.classList.add('fa-bars');
+                // Menu is closed: show hamburger icon (fa-bars)
+                iconElement.classList.remove('fa-xmark');
+                iconElement.classList.add('fa-bars');
             }
         }
         
@@ -833,7 +879,10 @@
                 // Offset calculation adjusted for fixed header height (around 80px)
                 const offset = sec.offsetTop - 150; 
                 const height = sec.offsetHeight;
-                const id = sec.getAttribute('id');
+                let id = sec.getAttribute('id');
+                
+                // Add conditional check for null id to prevent errors
+                if (!id) return; 
 
                 if (top >= offset && top < offset + height) {
                     navLinks.forEach(link => {
@@ -849,15 +898,12 @@
         
         // --- Event Listeners and Initialization ---
         
-        // Hide navigation and update icon when a link is clicked (mobile)
+        // Closes the menu when a navigation link is clicked (on mobile)
         document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('click', () => {
-                if (window.innerWidth < 995) {
-                    // Check if the menu is open before closing
-                    if (nav.classList.contains('active')) {
-                         // Only call toggleMenu if the menu is actually open
-                        toggleMenu();
-                    }
+                // Check if the menu is open (only relevant on mobile)
+                if (window.innerWidth < 995 && nav.classList.contains('active')) {
+                    toggleMenu(); // Closes the menu and toggles the icon back to 'fa-bars'
                 }
             });
         });
@@ -865,8 +911,6 @@
         window.onload = () => {
             type();
             updateActiveLink();
-            // Scroll to the home section on initial load 
-            document.getElementById('home').scrollIntoView();
         };
 
         window.onscroll = updateActiveLink;
@@ -875,7 +919,9 @@
         // WhatsApp Form Submission Logic
         // ==========================================================
         const whatsappForm = document.getElementById('whatsappForm');
-        const WHATSAPP_NUMBER = '+94727067046'; // Placeholder: Replace with your actual WhatsApp number (e.g., '15551234567')
+        
+        // UPDATED: Using the provided tiny.cc link instead of a raw number
+        const WHATSAPP_LINK = 'http://tiny.cc/hamzalabz'; 
 
         if (whatsappForm) {
             whatsappForm.addEventListener('submit', function(e) {
@@ -893,8 +939,8 @@
                 // 2. URL encode the message
                 const encodedMessage = encodeURIComponent(whatsappMessage);
 
-                // 3. Construct the final WhatsApp API URL
-                const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+                // 3. Construct the final WhatsApp API URL by appending the encoded message to the short link
+                const whatsappUrl = `${WHATSAPP_LINK}?text=${encodedMessage}`;
 
                 // 4. Redirect the user to WhatsApp in a new tab
                 window.open(whatsappUrl, '_blank');
